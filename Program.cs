@@ -7,24 +7,38 @@ namespace GuessNumber
         static void Main(string[] args)
         {
             Random randomNum = new Random();
-            int randomTarget = randomNum.Next(100) + 1;
-            int numGuess = 0;
 
-            while (numGuess != randomTarget)
+            var userAnswer = "";
+            var isHigher = "";
+            int guess = 0;
+            var min = 1;
+            var max = 100;
+            var lowMax = 50;
+
+            Console.WriteLine("Guess a number between 1 and 100: ");
+            Console.WriteLine("Is the number 50 or higher : ");
+            isHigher = Console.ReadLine();
+            while (userAnswer != "yes")
             {
-                Console.WriteLine("Guess a number between 1 and 100: ");
-                int.TryParse(Console.ReadLine(), out numGuess);
-                if (numGuess > randomTarget)
+
+                if (isHigher == "yes")
                 {
-                    Console.WriteLine("{0} is too high!", numGuess);
-                }
-                else if (numGuess < randomTarget)
-                {
-                    Console.WriteLine("{0} is too low!", numGuess);
+
+                    min = 50;
+                    var highTarget = (min + max) / 2;
+                    guess = highTarget - 1;
+                    max = guess;
+                    Console.WriteLine($"Is the number {guess}");
+                    userAnswer = Console.ReadLine();
                 }
                 else
                 {
-                    Console.WriteLine("{0} is right congratulations!", numGuess);
+                    min = 1;
+                    var lowTarget = (min + lowMax) / 2;
+                    guess = lowTarget - 1;
+                    lowMax = guess;
+                    Console.WriteLine($"Is the number {guess}");
+                    userAnswer = Console.ReadLine();
                 }
             }
         }
